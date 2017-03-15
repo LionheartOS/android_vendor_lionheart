@@ -1,6 +1,6 @@
-# Inherit common CM stuff
+# Inherit common LionheartOS stuff
 $(call inherit-product, vendor/cm/config/common_mini.mk)
 
-# Required CM packages
+# Required LionheartOS packages
 PRODUCT_PACKAGES += \
     LatinIME

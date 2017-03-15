@@ -1,4 +1,4 @@
-PRODUCT_BRAND ?= LineageOS
+PRODUCT_BRAND ?= LionheartOS
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 
@@ -31,10 +31,6 @@ ifneq ($(TARGET_BUILD_VARIANT),eng)
 ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
 endif
 
-# Copy over the changelog to the device
-PRODUCT_COPY_FILES += \
-    vendor/cm/CHANGELOG.mkdn:system/etc/CHANGELOG-CM.txt
-
 # Backup Tool
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/bin/backuptool.sh:install/bin/backuptool.sh \
@@ -61,9 +57,9 @@ PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 endif
 
-# CM-specific init file
+# Lionheart-specific init file
 PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/init.local.rc:root/init.cm.rc
+    vendor/cm/prebuilt/common/etc/init.local.rc:root/init.lionheart.rc
 
 # Copy over added mimetype supported in libcore.net.MimeUtils
 PRODUCT_COPY_FILES += \
@@ -77,15 +73,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     frameworks/base/data/keyboards/Vendor_045e_Product_028e.kl:system/usr/keylayout/Vendor_045e_Product_0719.kl
 
-# This is CM!
+# This is LionheartOS!
 PRODUCT_COPY_FILES += \
     vendor/cm/config/permissions/com.cyanogenmod.android.xml:system/etc/permissions/com.cyanogenmod.android.xml
 
-# Include CM audio files
-include vendor/cm/config/cm_audio.mk
-
-# Theme engine
-include vendor/cm/config/themes_common.mk
+# Include LionheartOS audio files
+include vendor/cm/config/lionheart_audio.mk
 
 ifneq ($(TARGET_DISABLE_CMSDK), true)
 # CMSDK
@@ -96,7 +89,7 @@ endif
 PRODUCT_PACKAGES += \
     bootanimation.zip
 
-# Required CM packages
+# Required LionheartOS packages
 PRODUCT_PACKAGES += \
     BluetoothExt \
     CMAudioService \
@@ -105,7 +98,7 @@ PRODUCT_PACKAGES += \
     Profiles \
     WeatherManagerService
 
-# Optional CM packages
+# Optional LionheartOS packages
 PRODUCT_PACKAGES += \
     libemoji \
     LiveWallpapersPicker \
@@ -117,7 +110,7 @@ PRODUCT_PACKAGES += \
     libprotobuf-cpp-full \
     librsjni
 
-# Custom CM packages
+# Custom LionheartOS packages
 PRODUCT_PACKAGES += \
     AudioFX \
     CMSettingsProvider \
@@ -135,7 +128,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     Exchange2
 
-# Extra tools in CM
+# Extra tools in LionheartOS
 PRODUCT_PACKAGES += \
     7z \
     bash \
@@ -291,30 +284,30 @@ endif
 
 ifeq ($(CM_BUILDTYPE), RELEASE)
     ifndef TARGET_VENDOR_RELEASE_BUILD_ID
-        LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+        LIONHEART_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
     else
         ifeq ($(TARGET_BUILD_VARIANT),user)
             ifeq ($(CM_VERSION_MAINTENANCE),0)
-                LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+                LIONHEART_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
             else
-                LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
+                LIONHEART_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(TARGET_VENDOR_RELEASE_BUILD_ID)-$(CM_BUILD)
             endif
         else
-            LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
+            LIONHEART_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(PRODUCT_VERSION_MAINTENANCE)$(PRODUCT_VERSION_DEVICE_SPECIFIC)-$(CM_BUILD)
         endif
     endif
 else
     ifeq ($(CM_VERSION_MAINTENANCE),0)
-        LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+        LIONHEART_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
     else
-        LINEAGE_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
+        LIONHEART_VERSION := $(PRODUCT_VERSION_MAJOR).$(PRODUCT_VERSION_MINOR).$(CM_VERSION_MAINTENANCE)-$(shell date -u +%Y%m%d)-$(CM_BUILDTYPE)$(CM_EXTRAVERSION)-$(CM_BUILD)
     endif
 endif
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.cm.version=$(LINEAGE_VERSION) \
+    ro.cm.version=$(LIONHEART_VERSION) \
     ro.cm.releasetype=$(CM_BUILDTYPE) \
-    ro.modversion=$(LINEAGE_VERSION) \
+    ro.modversion=$(LIONHEART_VERSION) \
     ro.cmlegal.url=https://lineageos.org/legal
 
 PRODUCT_EXTRA_RECOVERY_KEYS += \
@@ -322,7 +315,7 @@ PRODUCT_EXTRA_RECOVERY_KEYS += \
 
 -include vendor/cm-priv/keys/keys.mk
 
-CM_DISPLAY_VERSION := $(LINEAGE_VERSION)
+CM_DISPLAY_VERSION := $(LIONHEART_VERSION)
 
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),)
 ifneq ($(PRODUCT_DEFAULT_DEV_CERTIFICATE),build/target/product/security/testkey)

@@ -1,11 +1,11 @@
-# Inherit common CM stuff
+# Inherit common LionheartOS stuff
 $(call inherit-product, vendor/cm/config/common_full.mk)
 
-# Required CM packages
+# Required LionheartOS packages
 PRODUCT_PACKAGES += \
     LatinIME
 
-# Include CM LatinIME dictionaries
+# Include LionheartOS LatinIME dictionaries
 PRODUCT_PACKAGE_OVERLAYS += vendor/cm/overlay/dictionaries
 
 $(call inherit-product, vendor/cm/config/telephony.mk)

@@ -1,5 +1,5 @@
 #
-# CyanogenMod Audio Files
+# LionheartOS Audio Files
 #
 
 ALARM_PATH := vendor/cm/prebuilt/common/media/audio/alarms
