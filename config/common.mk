@@ -118,7 +118,7 @@ PRODUCT_PACKAGES += \
     ExactCalculator \
     LiveLockScreenService \
     LockClock \
-    Trebuchet \
+    Launcher3 \
     WallpaperPicker \
     WeatherProvider
 
