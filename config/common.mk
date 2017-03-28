@@ -121,6 +121,7 @@ PRODUCT_PACKAGES += \
     LiveLockScreenService \
     LockClock \
     Launcher3 \
+    ThemeInterfacer \
     WallpaperPicker \
     WeatherProvider
 
